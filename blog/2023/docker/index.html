@@ -1,0 +1,112 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> [miscellaneous] docker usage | Joel Lee </title> <meta name="author" content="Joel Lee"> <meta name="description" content="Docker Usage"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css"> <link rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons"> <link rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://joonhyung-lee.github.io//blog/2023/docker/"> <link rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script src="/assets/js/theme.js?bf50d6d9dd867d3e0f3b0add94449649"></script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Joel Lee </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item dropdown "> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">miscellaneous </a> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <a class="dropdown-item " href="/repositories/">repositories</a> <div class="dropdown-divider"></div> <a class="dropdown-item " href="/teaching/">teaching</a> <div class="dropdown-divider"></div> <a class="dropdown-item " href="/gallery/">gallery</a> </div> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="fa-solid fa-moon"></i> <i class="fa-solid fa-sun"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">[miscellaneous] docker usage</h1> <p class="post-meta"> December 13, 2023 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/docker"> <i class="fa-solid fa-hashtag fa-sm"></i> Docker</a>     ·   <a href="/blog/category/miscellaneous"> <i class="fa-solid fa-tag fa-sm"></i> miscellaneous</a>   </p> </header> <article class="post-content"> <div id="markdown-content"> <blockquote> <p>기타 유용한 <code class="language-plaintext highlighter-rouge">Docker</code> 명령어에 대해 작성합니다.</p> </blockquote> <h3 id="make-dockerfile">Make Dockerfile</h3> <ul> <li>Get docker image <ul> <li><code class="language-plaintext highlighter-rouge">docker pull nvidia/cuda:11.6.1-devel-ubuntu20.04</code></li> </ul> </li> <li>Dockerfile <ul> <li><strong>반드시 파일의 제목은 <code class="language-plaintext highlighter-rouge">Dockerfile</code> 이어야 한다. (확장자는 없음.)</strong></li> </ul> </li> </ul> <h4 id="example-dockerfile">Example <strong>Dockerfile</strong> </h4> <div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 기존 이미지를 기반으로 사용</span>
+<span class="c"># Use nvidia/cuda version matches your server</span>
+<span class="k">FROM</span><span class="s"> nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04</span>
+
+<span class="c"># 필요한 패키지 설치</span>
+<span class="c"># Install ubuntu apt packages. Do not remove default packages.</span>
+<span class="k">RUN </span>apt-get update
+<span class="c"># opencv-python error</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive apt-get <span class="nb">install</span><span class="se">\
+</span>    libgl1<span class="se">\
+</span>    libgl1-mesa-glx <span class="se">\ </span>
+    libglib2.0-0 -y &amp;&amp; \
+    rm -rf /var/lib/apt/lists/*
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="se">\
+</span>    wget <span class="se">\
+</span>    apt-utils <span class="se">\
+</span>    build-essential <span class="se">\
+</span>    ca-certificates <span class="se">\
+</span>    curl <span class="se">\
+</span>    git <span class="se">\
+</span>    htop <span class="se">\
+</span>    <span class="nb">sudo</span> <span class="se">\
+</span>    vim <span class="se">\
+</span>    python3-dev <span class="se">\
+</span>    python3-pip <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+
+<span class="c"># Miniconda 설치</span>
+<span class="k">RUN </span>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh <span class="nt">-O</span> /miniconda.sh
+<span class="k">RUN </span>bash /miniconda.sh <span class="nt">-b</span> <span class="nt">-p</span> /miniconda
+<span class="k">ENV</span><span class="s"> PATH="/miniconda/bin:${PATH}"</span>
+
+<span class="c"># Conda를 이용해 Python3 설치 및 Python 패키지 설치</span>
+<span class="k">RUN </span>conda <span class="nb">install</span> <span class="nt">-y</span> <span class="nv">python</span><span class="o">=</span>3.9 <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    pip3 <span class="nt">--no-cache-dir</span> <span class="nb">install</span> <span class="nt">--upgrade</span> <span class="se">\
+</span>    pip <span class="se">\
+</span>    setuptools <span class="se">\
+</span>    ipython <span class="se">\
+</span>    ipdb <span class="se">\
+</span>    matplotlib <span class="se">\
+</span>    pandas <span class="se">\
+</span>    scipy <span class="se">\
+</span>    torch <span class="se">\
+</span>    jupyter <span class="se">\
+</span>    torchvision <span class="se">\
+</span>    torchtext <span class="se">\
+</span>    torchsummary <span class="se">\
+</span>    slacker <span class="se">\
+</span>    tqdm
+
+<span class="c"># # 사용자 설정</span>
+<span class="c"># ARG UNAME</span>
+<span class="c"># ARG UID</span>
+<span class="c"># ARG GID</span>
+
+<span class="c"># # Ensure that the group and user are created successfully</span>
+<span class="c"># RUN if [ -z "$UNAME" ] || [ -z "$UID" ] || [ -z "$GID" ]; then echo "UNAME, UID, and GID arguments are required" &amp;&amp; exit 1; fi &amp;&amp; \</span>
+<span class="c">#     addgroup --gid ${GID} ${UNAME} &amp;&amp; \</span>
+<span class="c">#     useradd -m -u ${UID} -g ${GID} -s /bin/bash ${UNAME} &amp;&amp; \</span>
+<span class="c">#     adduser ${UNAME} sudo</span>
+
+<span class="c"># USER ${UNAME}</span>
+<span class="c"># WORKDIR /home/${UNAME}</span>
+
+<span class="k">CMD</span><span class="s"> [ "/bin/bash" ]</span>
+</code></pre></div></div> <details> <summary>Build Log</summary> <div> <div class="language-docker highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>joonhyung@devbox:~/dockers/joonh_cu116$ docker build -t joonh_cu116 .
+[+] Building 260.0s (11/11) FINISHED                                                                                                                                                    
+ =&gt; [internal] load .dockerignore                                                                                                                                                  0.0s
+ =&gt; =&gt; transferring context: 2B                                                                                                                                                    0.0s
+ =&gt; [internal] load build definition from Dockerfile                                                                                                                               0.0s
+ =&gt; =&gt; transferring dockerfile: 1.72kB                                                                                                                                             0.0s
+ =&gt; [internal] load metadata for docker.io/nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04                                                                                             0.0s
+ =&gt; [1/7] FROM docker.io/nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04                                                                                                               0.0s
+ =&gt; CACHED [2/7] RUN apt-get update                                                                                                                                                0.0s
+ =&gt; [3/7] RUN apt-get update &amp;&amp; DEBIAN_FRONTEND=noninteractive apt-get install    libgl1    libgl1-mesa-glx     libglib2.0-0 -y &amp;&amp;     rm -rf /var/lib/apt/lists/*                19.2s
+ =&gt; [4/7] RUN apt-get update &amp;&amp; DEBIAN_FRONTEND=noninteractive apt-get install -y     wget     apt-utils     build-essential     ca-certificates     curl     git     htop     s  24.1s
+ =&gt; [5/7] RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /miniconda.sh                                                                          3.0s
+ =&gt; [6/7] RUN bash /miniconda.sh -b -p /miniconda                                                                                                                                  6.4s
+ =&gt; [7/7] RUN conda install -y python=3.9 &amp;&amp;     pip3 --no-cache-dir install --upgrade     pip     setuptools     ipython     ipdb     matplotlib     pandas     scipy     torc  177.4s
+ =&gt; exporting to image                                                                                                                                                            29.8s
+ =&gt; =&gt; exporting layers                                                                                                                                                           29.8s
+ =&gt; =&gt; writing image sha256:48e3f2be75424e71be48c75d5472c90a9bf5ac9c94586bd723127d5bed67714b                                                                                       0.0s 
+ =&gt; =&gt; naming to docker.io/library/joonh_cu116
+</code></pre></div> </div> </div> </details> <h4 id="build-docker-image">Build docker image</h4> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> <span class="o">[</span>이미지 이름:이미지 버전] <span class="o">[</span>Dockerfile의 경로]
+docker build <span class="nt">-t</span> joonh_cu116 <span class="nb">.</span>
+docker build <span class="nt">--build-arg</span> <span class="nv">UNAME</span><span class="o">=</span>joonhyung-lee <span class="nt">--build-arg</span> <span class="nv">UID</span><span class="o">=</span>1001 <span class="nt">--build-arg</span> <span class="nv">GID</span><span class="o">=</span>1001 <span class="nt">-t</span> joonh_cu116 <span class="nb">.</span>
+</code></pre></div></div> <h4 id="get-built-docker-images">Get built docker images</h4> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker images
+<span class="o">&gt;&gt;&gt;</span> joonh_cu116    latest    7c1bae5ab933   33 seconds ago   9.56GB
+</code></pre></div></div> <h4 id="start-docker-container">Start Docker Container</h4> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-v</span> <span class="o">[</span>로컬_경로]:[컨테이너_경로] <span class="nt">-it</span> <span class="nt">--gpus</span> all <span class="o">[</span>이미지_이름]:[태그] /bin/bash
+docker run <span class="nt">-v</span> /home/joonhyung/python/:/home/root/python <span class="nt">-it</span> <span class="nt">--gpus</span> all joonh_cu116:latest /bin/bash
+</code></pre></div></div> <h2 id="commit-and-push-docker-container">Commit and Push Docker Container</h2> <h3 id="get-information-about-container">get information about container</h3> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>joonhyung@devbox:~/dockers/joonh_cu116<span class="nv">$ </span>docker ps
+CONTAINER ID   IMAGE                              COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+79b602e29923   c2e91d98d3ed                       <span class="s2">"/opt/nvidia/nvidia_…"</span>   About an hour ago   Up About an hour                                               magical_neumann
+</code></pre></div></div> <h3 id="commit">Commit</h3> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker commit CONTAINER IMAGE_NAME
+joonhyung@devbox:~/dockers/joonh_cu116<span class="nv">$ </span>docker commit 79b602e29923 joonh_cu116:v00
+sha256:f50aabee25697dc96bc80f76fd231c74d1fbfe77cb47698a4ec89e0b84c5ba81
+</code></pre></div></div> <ul> <li>docker images로 image가 적절하게 생성되었는지 확인 가능.</li> </ul> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  joonhyung@devbox:~/dockers/joonh_cu116<span class="nv">$ </span>docker images
+  REPOSITORY                                                  TAG                               IMAGE ID       CREATED          SIZE
+  joonh_cu116                                                 v00                               f50aabee2569   14 seconds ago   31GB
+</code></pre></div></div> <h3 id="build-dockerfile">Build <strong><code class="language-plaintext highlighter-rouge">Dockerfile</code></strong> </h3> <ul> <li>Add lines <ul> <li> <div class="language-shell highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>FROM joonh_cu116:v00
+<span class="c"># Install ubuntu apt packages.</span>
+RUN <span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> &lt;ubuntu-packages&gt;
+</code></pre></div> </div> </li> </ul> </li> <li>Build New version <ul> <li> <div class="language-shell highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> joonh_cu116:v01 <span class="nb">.</span>
+</code></pre></div> </div> </li> </ul> </li> </ul> <h3 id="login-docker-server">Login Docker server</h3> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  joonhyung@devbox:~/dockers/joonh_cu116_v00<span class="nv">$ </span>docker login <span class="nt">-u</span> joonhyunglee
+  Password: 
+  WARNING! Your password will be stored unencrypted <span class="k">in</span> /home/joonhyung/.docker/config.json.
+  Configure a credential helper to remove this warning. See
+  https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+  Login Succeeded
+</code></pre></div></div> <h3 id="push-on-docker">push on Docker</h3> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>joonhyung@devbox:~/dockers/joonh_cu116_v00<span class="nv">$ </span>docker push joonhyunglee/joonh_cu116:v01
+</code></pre></div></div> </div> </article> <br> <hr> <br> <ul class="list-disc pl-8"></ul> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/pyenv/">[miscellaneous] pyenv usage</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/apriltag-pose-estimation/">[구현] AprilTag Pose Estimation</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/mujoco/">[구현] MuJoCo 기초 사용법</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/dream2real/">[paper-review] Dream2Real: Zero-Shot 3D Object Rearrangement with Vision-Language Models</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/vq/">[study] Vector Quantization</a> </li> <div id="giscus_thread" style="max-width: 800px; margin: 0 auto;"> <script>let giscusTheme=localStorage.getItem("theme"),giscusAttributes={src:"https://giscus.app/client.js","data-repo":"joonhyung-lee/joonhyung-lee.github.io","data-repo-id":"","data-category":"Comments","data-category-id":"","data-mapping":"title","data-strict":"1","data-reactions-enabled":"1","data-emit-metadata":"0","data-input-position":"bottom","data-theme":giscusTheme,"data-lang":"en",crossorigin:"anonymous",async:""},giscusScript=document.createElement("script");Object.entries(giscusAttributes).forEach(([t,e])=>giscusScript.setAttribute(t,e)),document.getElementById("giscus_thread").appendChild(giscusScript);</script> <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2024 Joel Lee. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script> <script defer src="/assets/js/masonry.js" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script defer src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script> <script src="/assets/js/no_defer.js?2930004b8d7fcd0a8e00fdcfc8fc9f24"></script> <script defer src="/assets/js/common.js?4a129fbf39254905f505c7246e641eaf"></script> <script defer src="/assets/js/copy_code.js?7254ae07fe9cc5f3a10843e1c0817c9c" type="text/javascript"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script type="text/javascript">window.MathJax={tex:{tags:"ams"}};</script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script> <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script type="text/javascript">function progressBarSetup(){"max"in document.createElement("progress")?(initializeProgressElement(),$(document).on("scroll",function(){progressBar.attr({value:getCurrentScrollPosition()})}),$(window).on("resize",initializeProgressElement)):(resizeProgressBar(),$(document).on("scroll",resizeProgressBar),$(window).on("resize",resizeProgressBar))}function getCurrentScrollPosition(){return $(window).scrollTop()}function initializeProgressElement(){let e=$("#navbar").outerHeight(!0);$("body").css({"padding-top":e}),$("progress-container").css({"padding-top":e}),progressBar.css({top:e}),progressBar.attr({max:getDistanceToScroll(),value:getCurrentScrollPosition()})}function getDistanceToScroll(){return $(document).height()-$(window).height()}function resizeProgressBar(){progressBar.css({width:getWidthPercentage()+"%"})}function getWidthPercentage(){return getCurrentScrollPosition()/getDistanceToScroll()*100}const progressBar=$("#progress");window.onload=function(){setTimeout(progressBarSetup,50)};</script> </body> </html>
