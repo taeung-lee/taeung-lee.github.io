@@ -1,0 +1,84 @@
+---
+---
+@article{lee2024vpi,
+      author={Lee, Joonhyung, and Park, Sangbeom and Kwon, Yongin and Lee, Jemin and Ahn, Minwook and Choi, Sungjoon},
+      title={Visual Preference Inference: An Image Sequence-Based Preference Reasoning in Tabletop Object Manipulation},
+      journal={IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) (Submitted)},
+      publisher={IEEE},
+      year={2024},
+      abstract={In robotic object manipulation, human preferences can often be influenced by the visual attributes of objects, such as color and shape. These properties play a crucial role in operating a robot to interact with objects and align with human intention. In this paper, we focus on the problem of inferring underlying human preferences from a sequence of raw visual observations in tabletop manipulation environments with a variety of object types, named Visual Preference Inference (VPI). To facilitate visual reasoning in the context of manipulation, we introduce the Chain-of-Visual-Residuals (CoVR) method. CoVR employs a prompting mechanism that describes the difference between the consecutive images (i.e., visual residuals) and incorporates such texts with a sequence of images to infer the user's preference. This approach significantly enhances the ability to understand and adapt to dynamic changes in its visual environment during manipulation tasks. Furthermore, we incorporate such texts along with a sequence of images to infer the user's preferences. Our method outperforms baseline methods in terms of extracting human preferences from visual sequences in both simulation and real-world environments. Code and videos are available at: \href{https://joonhyung-lee.github.io/vpi/}{https://joonhyung-lee.github.io/vpi/}},
+      pdf={https://arxiv.org/abs/2403.11513},
+      code={https://github.com/joonhyung-lee/vpi},
+      website={https://joonhyung-lee.github.io/vpi/},
+      preview={vpi.gif},
+      selected={true},
+}
+
+@article{park2024QD-teleop,
+      author={Park, Sangbeom and Yoon, Taerim and Lee, Joonhyung and Park, Sunghyun and Choi, Sungjoon},
+      title={Quality-Diversity based Semi-Autonomous Teleoperation using Reinforcement Learning},
+      journal={Neural Networks (Submitted)},
+      publisher={Elsevier},
+      year={2024},
+      preview={QD-teleop.png},
+      selected={true},
+}
+
+@article{lee2023spots,
+      title={SPOTS: Stable Placement of Objects with Reasoning in Semi-Autonomous Teleoperation Systems}, 
+      author={Lee, Joonhyung and Park, Sangbeom and Park, Jeongeun and Lee, Kyungjae and Choi, Sungjoon},
+      journal={IEEE International Conference on Robotics and Automation (ICRA)},
+      publisher={IEEE},
+      year={2024},
+      abstract={Pick-and-place is one of the fundamental tasks in robotics research. However, the attention has been mostly focused on the ``pick'' task, leaving the ``place'' task relatively unexplored. In this paper, we address the problem of placing objects in the context of a teleoperation framework. Particularly, we focus on two aspects of the place task: stability robustness and contextual reasonableness of object placements. Our proposed method combines simulation-driven physical stability verification via real-to-sim and the semantic reasoning capability of large language models. In other words, given place context information (e.g., user preferences, object to place, and current scene information), our proposed method outputs a probability distribution over the possible placement candidates, considering the robustness and reasonableness of the place task. Our proposed method is extensively evaluated in two simulation and one real world environments and we show that our method can greatly increase the physical plausibility of the placement as well as contextual soundness while considering user preferences.},
+      pdf={https://arxiv.org/pdf/2309.13937.pdf},
+      code={https://github.com/joonhyung-lee/spots},
+      website={https://joonhyung-lee.github.io/spots/},
+      abbr={ICRA},
+      primaryClass={cs.RO},
+      preview={spots.gif},
+      selected={true}
+}
+
+@article{park2023clara,
+      title={CLARA: Classifying and Disambiguating User Commands for Reliable Interactive Robotic Agents}, 
+      author={Park, Jeongeun and Lim, Seungwon and Lee, Joonhyung and Park, Sangbeom and Chang, Minsuk and Yu, Youngjae and Choi, Sungjoon},
+      journal={IEEE Robotics and Automation Letters (RA-L)},
+      publisher={IEEE},
+      year={2023},
+      abstract={In this paper, we focus on inferring whether the given user command is clear, ambiguous, or infeasible in the context of interactive robotic agents utilizing large language models (LLMs). To tackle this problem, we first present an uncertainty estimation method for LLMs to classify whether the command is certain (i.e., clear) or not (i.e., ambiguous or infeasible). Once the command is classified as uncertain, we further distinguish it between ambiguous or infeasible commands leveraging LLMs with situational aware context in a zero-shot manner. For ambiguous commands, we disambiguate the command by interacting with users via question generation with LLMs. We believe that proper recognition of the given commands could lead to a decrease in malfunction and undesired actions of the robot, enhancing the reliability of interactive robot agents. We present a dataset for robotic situational awareness, consisting pair of high-level commands, scene descriptions, and labels of command type (i.e., clear, ambiguous, or infeasible). We validate the proposed method on the collected dataset, pick-and-place tabletop simulation. Finally, we demonstrate the proposed approach in real-world human-robot interaction experiments, i.e., handover scenarios.},
+      pdf={https://arxiv.org/abs/2306.10376},
+      code={https://github.com/jeongeun980906/CLARA-SaGC-Code},
+      website={https://clararobot.github.io/},
+      abbr={RA-L},
+      preview={clara.gif},
+      selected={true}
+}
+
+@article{shin2023boarding,
+author="Shin, Seungyoun
+and Lee, Joonhyung
+and Noh, Junhyug
+and Choi, Sungjoon",
+editor="Lu, Huimin
+and Blumenstein, Michael
+and Cho, Sung-Bae
+and Liu, Cheng-Lin
+and Yagi, Yasushi
+and Kamiya, Tohru",
+title="Robust Detection for Autonomous Elevator Boarding Using a Mobile Manipulator",
+booktitle="Asian Conference on Pattern Recognition",
+year="2023",
+publisher="Springer Nature Switzerland",
+address="Cham",
+abstract={Indoor robots are becoming increasingly prevalent across a range of sectors, but the challenge of navigating multi-level structures through elevators remains largely uncharted. For a robot to operate successfully, it's pivotal to have an accurate perception of elevator states. This paper presents a robust robotic system, tailored to interact adeptly with elevators by discerning their status, actuating buttons, and boarding seamlessly. Given the inherent issues of class imbalance and limited data, we utilize the YOLOv7 model and adopt specific strategies to counteract the potential decline in object detection performance. Our method effectively confronts the class imbalance and label dependency observed in real-world datasets, Our method effectively confronts the class imbalance and label dependency observed in real-world datasets, offering a promising approach to improve indoor robotic navigation systems.},
+pdf={https://link.springer.com/chapter/10.1007/978-3-031-47634-1_2},
+journal={Asian Conference on Pattern Recognition (ACPR)},
+code={https://github.com/joonhyung-lee/robust-detection-for-elevator-boarding},
+website={https://joonhyung-lee.github.io/robust-detection-for-elevator-boarding/},
+abbr={ACPR},
+pages="15--28",
+isbn="978-3-031-47634-1",
+preview={elevator-boarding.gif},
+selected={true}
+}

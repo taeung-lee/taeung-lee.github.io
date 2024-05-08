@@ -1,0 +1,13 @@
+github:
+  - joonhyung-lee
+
+github_repos:
+  - joonhyung-lee/spots
+  - joonhyung-lee/mujoco-robotics-usage
+  - joonhyung-lee/mujoco-py-usage
+  - joonhyung-lee/mujoco-ycb-dataset
+  - joonhyung-lee/mujoco-nonprehensile
+
+teaching_assistant:
+  - joonhyung-lee/xai615-code
+  - joonhyung-lee/xai615-realworld
